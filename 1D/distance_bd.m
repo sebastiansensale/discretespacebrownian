@@ -5,10 +5,10 @@
 
 clc;clear;reset(RandStream.getGlobalStream, sum(100*clock));
 for factor=1:1
-    trajectories=500;D=1;delta=1/5;limit=1;separation=1;
+    trajectories=50;D=1;delta=1/5;limit=1;separation=1;kbeta=1;
     for i=1:trajectories
         j=1;nostop=1;timeA(1)=0;timeB(1)=0;
-        f=initial(delta,limit,separation);
+        f=initial(delta,limit,separation,kbeta);
         coordA(1,1)=f(1);coordB(1,1)=f(2);
         
         while nostop
