@@ -1,10 +1,10 @@
-function f=initial(delta,limit,separation)
+function f=initial(delta,limit,separation,kbeta)
     lattice(1)=1E-6;
     for i=2:1000000
         lattice(i)=delta*i+lattice(1);
         lattice(1000000+i)=-delta*i+lattice(1);
     end;
-    random=normrnd(0,1,[1,4]);
+    random=normrnd(0,sqrt(1/kbeta),[1,4]);
     random(3)=random(3)+separation;
     [val(1),idx(1)]=min(abs(lattice-random(1)));
     [val(2),idx(2)]=min(abs(lattice-random(2)));
@@ -16,7 +16,7 @@ function f=initial(delta,limit,separation)
     f(4)=lattice(idx(4));%y2
     nostop=1;
     while pdist([f(1),f(2);f(3),f(4)],'euclidean')<=limit
-        random=normrnd(0,1,[1,4]);
+        random=normrnd(0,sqrt(1/kbeta),[1,4]);
         random(3)=random(3)+separation;
         [val(1),idx(1)]=min(abs(lattice-random(1)));
         [val(2),idx(2)]=min(abs(lattice-random(2)));
