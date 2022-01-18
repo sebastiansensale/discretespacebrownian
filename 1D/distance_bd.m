@@ -13,8 +13,8 @@ for factor=1:1
         
         while nostop
             j=j+1;
-            [dtA,probA]=timecont(D,delta,coordA(j-1,:));
-            [dtB,probB]=timecont(D,delta,coordB(j-1,:)-separation);
+            [dtA,probA]=timecont(D,delta,coordA(j-1,:),kbeta);
+            [dtB,probB]=timecont(D,delta,coordB(j-1,:)-separation,kbeta);
             
             timeA(j)=timeA(j-1)+dtA;
             timeB(j)=timeB(j-1)+dtB;
@@ -31,11 +31,11 @@ for factor=1:1
                 coordB([1:idmax-2],:)=[];
                 j=size(timeA,2);
             end;            
-            clearvars -except j timeA timeB coordA coordB i trajectories nostop D delta limit endtime  TIM factor separation mu
+            clearvars -except j timeA timeB coordA coordB i trajectories nostop D delta limit endtime  TIM factor separation mu kbeta
         end;
         
         TIM(i)=endtime;
-        clearvars -except TIM i trajectories factor D delta limit separation mu 
+        clearvars -except TIM i trajectories factor D delta limit separation mu kbeta
     end;
     Tim=TIM(TIM~=0);
     mu(factor)=mean(nonzeros(Tim));
